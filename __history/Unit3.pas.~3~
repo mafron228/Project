@@ -1,0 +1,105 @@
+unit Unit3;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TForm3 = class(TForm)
+    Image1: TImage;
+    Label3: TLabel;
+    Image2: TImage;
+    Button1: TButton;
+    SpeedButton1: TSpeedButton;
+    Edit1: TEdit;
+    ComboBox1: TComboBox;
+    procedure Label3Click(Sender: TObject);
+    procedure Label3MouseLeave(Sender: TObject);
+    procedure Label3MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure Button1Click(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1;
+
+
+
+
+procedure TForm3.Button1Click(Sender: TObject);
+Const
+x1 = -10;
+x2 = 10;
+m = 50;
+var
+x0, y0:integer;
+x,y:real;
+
+begin
+   with Image2 do
+   begin
+     x0 := Width div 2;
+     y0 := Height div 2;
+
+     with Canvas do
+     begin
+       Pen.Color := ClBlack;
+       Pen.Width := 1;
+       MoveTo(0,y0);
+       LineTo(width,y0);
+       MoveTo(x0,0);
+       LineTo(x0,Height);
+
+       Pen.Color := ClRed;
+       Pen.Width := 2;
+       x:=x1;
+       y:=sin(x);
+       MoveTo(x0 + Trunc(x*m), y0 - Trunc(y*m));
+       while x<x2 do
+       begin
+         x:= x + 0.01;
+         y:= sqr(x);
+         LineTo(x0 + Trunc(x*m), y0 - Trunc(y*m));
+       end;
+
+     end;
+   end;
+end;
+
+procedure TForm3.Label3Click(Sender: TObject);
+begin
+form1.show;
+form3.Close;
+
+end;
+
+procedure TForm3.Label3MouseLeave(Sender: TObject);
+begin
+label3.Font.Color:=clBLACK
+end;
+
+procedure TForm3.Label3MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+label3.Font.Color:=clMONEYGREEN;
+end;
+
+
+
+
+
+end.
